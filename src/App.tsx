@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import AppRouter from "components/AppRouter/AppRouter";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { ThemeProvider } from "styled-components";
+import theme from "assets/theme";
+import "bootstrap/dist/css/bootstrap.css";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFeather,
+  faMapMarkerAlt,
+  faPlus,
+  faImage
+} from "@fortawesome/free-solid-svg-icons";
+import { store } from "./store/index";
 
-function App() {
+library.add(fab, faFeather, faMapMarkerAlt, faPlus, faImage);
+
+const TravelApp = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
+    </ThemeProvider>
   );
-}
+};
 
-export default App;
+export default TravelApp;

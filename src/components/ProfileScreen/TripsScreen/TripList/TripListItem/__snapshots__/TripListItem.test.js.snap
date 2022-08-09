@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TripListItem should 1`] = `
+<div>
+  <li
+    class="sc-bczRLJ jfdduE alt"
+  >
+    <a
+      href="/trip/test_id"
+    >
+      <div
+        class="meta"
+      >
+        <div
+          class="photo"
+          style="background-image: url(test_url);"
+        />
+      </div>
+      <section
+        class="text"
+      >
+        <h3>
+          Test trip
+        </h3>
+        
+      </section>
+    </a>
+  </li>
+</div>
+`;
