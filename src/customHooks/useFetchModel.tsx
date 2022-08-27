@@ -30,7 +30,7 @@ interface Props {
   filter?: string;
 }
 
-export type FetchFunctionType = (props: Props) => Promise<void>;
+export type FetchFunctionType = (props: Props) => Promise<void> | any;
 
 interface FetchModelProps extends Props {
   dispatch: Dispatch<Action>;

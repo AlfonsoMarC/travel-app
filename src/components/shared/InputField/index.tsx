@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Field, FieldProps } from "formik";
+import ReactTooltip from "react-tooltip";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -30,6 +31,11 @@ const StyledContainer = styled.div`
     font-size: 16px;
     cursor: pointer;
   }
+  .icon-tooltip-text {
+    text-align: center;
+    display: flex;
+    max-width: 200px;
+  }
   .text-input-error-container {
     height: 20px;
   }
@@ -49,6 +55,7 @@ interface Props {
   autoComplete?: string;
   error?: string;
   icon?: string;
+  iconTooltipText?: string;
 }
 
 const TextInputField: React.FC<Props> = ({
@@ -58,8 +65,10 @@ const TextInputField: React.FC<Props> = ({
   type,
   autoComplete,
   error,
-  icon
+  icon,
+  iconTooltipText
 }) => {
+  const tooltipId = `${name}-${icon}`;
   return (
     <Field name={name}>
       {({ field, meta, form }: FieldProps) => (
@@ -71,9 +80,20 @@ const TextInputField: React.FC<Props> = ({
               autoComplete={autoComplete ? "on" : "off"}
               {...field}
             />
-            <div className="icon-container">
-              <span className="icon">{icon}</span>
-            </div>
+            {icon && (
+              <>
+                <div className="icon-container">
+                  <span className="icon" data-tip data-for={tooltipId}>
+                    {icon}
+                  </span>
+                </div>
+                {iconTooltipText && (
+                  <ReactTooltip id={tooltipId} effect="solid">
+                    <span className="icon-tooltip-text">{iconTooltipText}</span>
+                  </ReactTooltip>
+                )}
+              </>
+            )}
           </div>
           <div className="text-input-error-container">
             {!error && meta.touched && meta.error && (

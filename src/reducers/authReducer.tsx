@@ -22,6 +22,7 @@ const authReducer = (state: State = initialState, action: Action) => {
     case ACTION_TYPES.AUTH_LOGIN_REQUEST:
       return {
         ...state,
+        error: null,
         loading: true
       };
 
@@ -29,6 +30,7 @@ const authReducer = (state: State = initialState, action: Action) => {
       return {
         ...state,
         ...action.payload,
+        error: null,
         loading: false
       };
     case ACTION_TYPES.AUTH_LOGIN_FAILURE:
@@ -40,6 +42,7 @@ const authReducer = (state: State = initialState, action: Action) => {
     case ACTION_TYPES.AUTH_SIGNUP_REQUEST:
       return {
         ...state,
+        error: null,
         loading: true
       };
 
@@ -47,6 +50,7 @@ const authReducer = (state: State = initialState, action: Action) => {
       return {
         ...state,
         ...action.payload,
+        error: null,
         loading: false
       };
     case ACTION_TYPES.AUTH_SIGNUP_FAILURE:

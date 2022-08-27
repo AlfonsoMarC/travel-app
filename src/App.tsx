@@ -10,11 +10,24 @@ import {
   faFeather,
   faMapMarkerAlt,
   faPlus,
-  faImage
+  faImage,
+  faTrash,
+  faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
+import Modal from "react-modal";
 import { store } from "./store/index";
 
-library.add(fab, faFeather, faMapMarkerAlt, faPlus, faImage);
+library.add(
+  fab,
+  faFeather,
+  faMapMarkerAlt,
+  faPlus,
+  faImage,
+  faTrash,
+  faEllipsisH
+);
+
+Modal.setAppElement("#root");
 
 const TravelApp = () => {
   return (

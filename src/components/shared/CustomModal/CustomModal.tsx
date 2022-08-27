@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import styled from "styled-components";
 import { modalTitle } from "assets/mixins";
+import { Icon } from "../styles";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -37,12 +38,6 @@ const StyledContainer = styled.div`
   }
 `;
 
-const Icon = styled.span`
-  font-family: "Material Icons";
-  font-size: 24px;
-  cursor: pointer;
-`;
-
 interface Props {
   showModal: boolean;
   onCloseModal: () => void;
@@ -56,8 +51,6 @@ const CustomModal: React.FC<Props> = ({
   title,
   children
 }) => {
-  Modal.setAppElement("#root");
-
   return (
     <Modal
       isOpen={showModal}

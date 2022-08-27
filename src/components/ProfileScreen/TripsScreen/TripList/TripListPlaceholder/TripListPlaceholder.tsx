@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledTripListContainer = styled.div`
+const StyledPlaceholderContainer = styled.div`
   display: flex;
   height: 100%;
   background: ${({ theme }) => theme.color.bg};
@@ -12,16 +12,8 @@ const StyledTripListContainer = styled.div`
   }
 `;
 
-interface Props {
-  tripsLoading?: boolean;
-}
-
-const TripListPlaceholder: React.FC<Props> = ({ tripsLoading }) => {
-  return (
-    <StyledTripListContainer>
-      {tripsLoading ? "Loading..." : "Add some trips"}
-    </StyledTripListContainer>
-  );
+const TripListPlaceholder: React.FC = () => {
+  return <StyledPlaceholderContainer>Loading...</StyledPlaceholderContainer>;
 };
 
 export default TripListPlaceholder;

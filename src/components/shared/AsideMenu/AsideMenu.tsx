@@ -15,7 +15,7 @@ const StyledAsideContainer = styled.div`
     color: ${({ theme }) => theme.color.primary500};
     box-shadow: none;
   }
-  && .tooltip {
+  && .icon-tooltip {
     display: none;
   }
 

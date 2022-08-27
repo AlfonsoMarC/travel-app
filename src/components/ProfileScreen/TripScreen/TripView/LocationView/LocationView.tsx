@@ -5,48 +5,6 @@ import { CellMeasurerCacheInterface } from "react-virtualized/dist/es/CellMeasur
 import { Post } from "types/types";
 import VirtualList from "components/shared/VirtualList/VirtualList.js";
 
-const location = {
-  name: "Wroclaw",
-  coordinates: [1, 2],
-  posts: [
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place1",
-      comment: "very nice"
-    },
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place2",
-      comment: "very nice"
-    },
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place3",
-      comment: "very nice"
-    },
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place4",
-      comment: "very nice"
-    },
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place5",
-      comment: "very nice"
-    },
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place6",
-      comment: "very nice"
-    },
-    {
-      img: "https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg",
-      title: "very nice place7",
-      comment: "very nice"
-    }
-  ]
-};
-
 const StyledLocationViewContainer = styled.div`
   .ReactVirtualized__List {
     scrollbar-gutter: stable both-edges;
@@ -134,7 +92,7 @@ const LocationView: React.FC<Props> = ({ posts }) => {
   };
 
   return (
-    <StyledLocationViewContainer>
+    <StyledLocationViewContainer id="location-view-container">
       {posts.length ? (
         <VirtualList
           items={rows}

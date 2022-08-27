@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Formik, Form } from "formik";
+import { Formik, Form, FormikHelpers } from "formik";
 import * as yup from "yup";
 import TextInputField from "components/shared/InputField/index";
 import { signUp } from "actions/auth";
@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "components/shared/Button/Button";
 import { RootState } from "store";
+import { getErrorMessage } from "helpers/errors";
 
 interface Values {
   email: string;
   name: string;
   password1: string;
+  password2: string;
 }
 
 export enum PasswordStrength {
@@ -49,6 +51,9 @@ const strongPassword = new RegExp(
 const mediumPassword = new RegExp(
   "((?=.*[A-Z])|(?=.*[0-9])|(?=.*[^A-Za-z0-9]))(?=.{6,})"
 );
+
+const passwordTooltipMessage =
+  "The password must have at least 6 characters and contain a special character, a number or an uppercase letter";
 
 export const getPasswordStrength = (value?: string): PasswordStrength => {
   // "The password must have at least 6 characters and include one capital letter, number or special character";
@@ -97,23 +102,29 @@ const SignUpForm: React.FC = () => {
     password2: yup.string().required("Password is required")
   });
 
-  const initialValues = {
+  const initialValues2 = {
     email: signUpValues?.email || "",
     name: signUpValues?.name || "",
     password1: signUpValues?.password || "",
     password2: signUpValues?.password || ""
   };
 
-  const handleSignUp = ({ email, name, password1 }: Values) => {
+  const handleSignUp = (
+    { email, name, password1, password2 }: Values,
+    actions: FormikHelpers<Values>
+  ) => {
     dispatch(signUp(email, name, password1));
+    actions.resetForm({
+      values: { email, name, password1, password2 }
+    });
   };
 
   return (
     <>
       <Formik
-        initialValues={initialValues}
+        initialValues={initialValues2}
         validationSchema={validationSchema}
-        onSubmit={values => handleSignUp(values)}
+        onSubmit={(values, actions) => handleSignUp(values, actions)}
       >
         {({ dirty, isValid, values }) => {
           const passwordStrength = getPasswordStrength(values.password1);
@@ -135,6 +146,7 @@ const SignUpForm: React.FC = () => {
                 type="password"
                 error={error?.password?.msg}
                 icon={getIcon(passwordStrength)}
+                iconTooltipText={passwordTooltipMessage}
                 $passwordStrength={passwordStrength}
               />
               <TextInputField
@@ -149,6 +161,9 @@ const SignUpForm: React.FC = () => {
               >
                 Sign Up
               </Button>
+              {!dirty && error && (
+                <span className="submit-errors">{getErrorMessage(error)}</span>
+              )}
             </Form>
           );
         }}

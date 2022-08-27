@@ -17,7 +17,7 @@ const PostHeaderItem: React.FC<Props> = ({ title }) => {
   return (
     <StyledPostHeaderContainer>
       <span className="icon">pin</span>
-      {title}
+      <label>{title}</label>
     </StyledPostHeaderContainer>
   );
 };

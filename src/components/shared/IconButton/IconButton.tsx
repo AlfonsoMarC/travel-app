@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PropTypes from "prop-types";
 import { labelS } from "assets/mixins";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
@@ -25,7 +24,7 @@ const StyledContainer = styled.div`
     transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
   ${({ theme }) => theme.media.atSmall} {
-    .tooltip {
+    .icon-tooltip {
       position: absolute;
       top: 0;
       ${labelS};
@@ -39,7 +38,7 @@ const StyledContainer = styled.div`
       margin: 4px;
     }
 
-    .tooltip::before {
+    .icon-tooltip::before {
       position: absolute;
       content: "";
       height: 8px;
@@ -50,7 +49,8 @@ const StyledContainer = styled.div`
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
-    .icon:hover .tooltip {
+    .icon:hover .icon-tooltip {
+      display: flex;
       top: -45px;
       opacity: 1;
       visibility: visible;
@@ -58,18 +58,18 @@ const StyledContainer = styled.div`
     }
 
     .icon:hover span,
-    .icon:hover .tooltip {
+    .icon:hover .icon-tooltip {
       text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
     }
 
     .logo:hover,
-    .logo:hover .tooltip,
-    .logo:hover .tooltip::before {
+    .logo:hover .icon-tooltip,
+    .logo:hover .icon-tooltip::before {
       background-color: ${({ theme }) => theme.color.primary500};
       color: ${({ theme }) => theme.color.white};
     }
-    .tooltip,
-    .tooltip::before {
+    .icon-tooltip,
+    .icon-tooltip::before {
       z-index: 99;
     }
   }
@@ -87,7 +87,7 @@ const IconButton: React.FC<Props> = ({ className, icon, tooltip, onClick }) => {
     <StyledContainer className={className} onClick={onClick}>
       <div className="wrapper">
         <div className="icon logo">
-          {tooltip && <div className="tooltip">{tooltip}</div>}
+          {tooltip && <div className="icon-tooltip">{tooltip}</div>}
           <span>
             <FontAwesomeIcon icon={icon} size="1x" />
           </span>

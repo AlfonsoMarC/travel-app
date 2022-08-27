@@ -7,7 +7,11 @@ interface Props {
   method?: Methods;
 }
 
-const fetchWithoutToken = ({ endpoint, body, method = "GET" }: Props) => {
+export const fetchWithoutToken = ({
+  endpoint,
+  body,
+  method = "GET"
+}: Props) => {
   const url = `${baseUrl}/${endpoint}`;
 
   if (method === "GET") {
@@ -23,7 +27,7 @@ const fetchWithoutToken = ({ endpoint, body, method = "GET" }: Props) => {
   }
 };
 
-const fetchWithToken = ({ endpoint, body, method = "GET" }: Props) => {
+export const fetchWithToken = ({ endpoint, body, method = "GET" }: Props) => {
   const url = `${baseUrl}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
@@ -45,5 +49,3 @@ const fetchWithToken = ({ endpoint, body, method = "GET" }: Props) => {
     });
   }
 };
-
-export { fetchWithoutToken, fetchWithToken };

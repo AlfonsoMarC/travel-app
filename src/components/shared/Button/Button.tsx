@@ -1,3 +1,4 @@
+import { body } from "assets/mixins";
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -9,12 +10,22 @@ const StyledButton = styled.button<{
 }>`
   border-radius: 4px;
   padding: ${({ theme }) => theme.spacing.space};
+  ${body};
+
+  .spiner-container {
+    height: 24px;
+  }
 
   ${({ $block }) => {
     if ($block) {
       return css`
         width: fint-content;
         min-width: 60px;
+      `;
+    } else {
+      return css`
+        display: flex;
+        justify-content: center;
       `;
     }
   }};
@@ -69,11 +80,13 @@ const Button: React.FC<Props> = ({
       {...rest}
     >
       {loading ? (
-        <span
-          className="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true"
-        />
+        <div className="spinner-container">
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          />
+        </div>
       ) : (
         children
       )}

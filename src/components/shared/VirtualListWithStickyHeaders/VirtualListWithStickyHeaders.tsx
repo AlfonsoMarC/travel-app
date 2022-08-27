@@ -2,21 +2,21 @@ import React, { useRef, useMemo } from "react";
 import { useVirtual, defaultRangeExtractor, Range } from "react-virtual";
 
 export interface StickyHeader {
-  isHeader: true;
+  isHeader: boolean;
   [key: string]: any;
 }
 
-interface Props {
-  items: any[];
-  renderElement: (item: any) => JSX.Element;
+interface Props<T> {
+  items: (T | StickyHeader)[];
+  renderElement: (item: T) => JSX.Element;
   renderHeader?: (item: StickyHeader) => JSX.Element;
 }
 
-const VirtualListWithStickyHeaders: React.FC<Props> = ({
+const VirtualListWithStickyHeaders = <T,>({
   items,
   renderElement,
   renderHeader
-}) => {
+}: Props<T>) => {
   const parentRef = useRef(null);
   const activeStickyIndexRef = useRef<number>(-1);
 
@@ -87,19 +87,19 @@ const VirtualListWithStickyHeaders: React.FC<Props> = ({
       }}
       ref={parentRef}
     >
-      <div
+      <ul
         style={{
           height: `${rowVirtualizer.totalSize}px`,
           width: "100%",
           position: "relative"
         }}
       >
-        {rowVirtualizer.virtualItems.map(virtualItem => {
+        {rowVirtualizer.virtualItems.map((virtualItem, key) => {
           const item = items[virtualItem.index];
 
           return (
-            <div
-              key={virtualItem.index}
+            <li
+              key={key}
               ref={el => virtualItem.measureRef(el)}
               style={{
                 ...(isSticky(virtualItem.index) ? { zIndex: 1 } : {}),
@@ -111,15 +111,14 @@ const VirtualListWithStickyHeaders: React.FC<Props> = ({
                     }),
                 top: 0,
                 left: 0,
-                width: "100%",
-                height: `${item}px`
+                width: "100%"
               }}
             >
               {getHtmlElement(item)}
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 };

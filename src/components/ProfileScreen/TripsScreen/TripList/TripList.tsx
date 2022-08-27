@@ -95,15 +95,16 @@ const StyledTripListContainer = styled.div`
 interface Props {
   className?: string;
   tripsLoading: boolean;
-  trips: [Trip];
+  trips: Trip[];
 }
 
 const TripList: React.FC<Props> = ({ className, tripsLoading, trips }) => {
+  if (tripsLoading) {
+    return <TripListPlaceholder />;
+  }
   return (
-    <StyledTripListContainer className={className}>
-      {tripsLoading || !trips.length ? (
-        <TripListPlaceholder tripsLoading={tripsLoading} />
-      ) : (
+    <StyledTripListContainer className={className} id="trip-list-container">
+      {trips.length ? (
         <div className="trip-list-menu">
           <div className="trip-list-header">
             <h2>My Trips</h2>
@@ -115,6 +116,8 @@ const TripList: React.FC<Props> = ({ className, tripsLoading, trips }) => {
           </ul>
           <div className="trip-list-menu-footer" />
         </div>
+      ) : (
+        <div>Add some trips</div>
       )}
     </StyledTripListContainer>
   );

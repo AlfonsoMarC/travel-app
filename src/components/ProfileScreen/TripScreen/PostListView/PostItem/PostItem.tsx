@@ -13,7 +13,13 @@ interface Props {
 const PostItem: React.FC<Props> = ({ post }) => {
   return (
     <StyledPostItemContainer>
-      <img src={post.img} alt={post.title} width="100%" height="auto" />
+      <img
+        src={post.img}
+        alt={post.title}
+        width="100%"
+        height="auto"
+        loading="lazy"
+      />
       {post.title && <div className="post-title">{post.title}</div>}
       {post.comment && <div className="post-comment">{post.comment}</div>}
     </StyledPostItemContainer>

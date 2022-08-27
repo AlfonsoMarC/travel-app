@@ -135,14 +135,14 @@ export const signUp = (email: string, name: string, password: string) => {
           })
         );
       }
-    } catch {
+    } catch (error) {
       dispatch(
         signUpFailureAction({
-          error: "There was an error",
+          error,
           signUpValues: {
-            email: email,
-            name: name,
-            password: password
+            email,
+            name,
+            password
           }
         })
       );
