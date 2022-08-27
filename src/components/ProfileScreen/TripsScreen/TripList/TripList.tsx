@@ -100,7 +100,7 @@ interface Props {
 
 const TripList: React.FC<Props> = ({ className, tripsLoading, trips }) => {
   return (
-    <StyledTripListContainer className={className}>
+    <StyledTripListContainer className={className} id="trip-list-container">
       {tripsLoading || !trips.length ? (
         <TripListPlaceholder tripsLoading={tripsLoading} />
       ) : (

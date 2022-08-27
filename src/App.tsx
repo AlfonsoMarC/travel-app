@@ -10,11 +10,12 @@ import {
   faFeather,
   faMapMarkerAlt,
   faPlus,
-  faImage
+  faImage,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import { store } from "./store/index";
 
-library.add(fab, faFeather, faMapMarkerAlt, faPlus, faImage);
+library.add(fab, faFeather, faMapMarkerAlt, faPlus, faImage, faTrash);
 
 const TravelApp = () => {
   return (

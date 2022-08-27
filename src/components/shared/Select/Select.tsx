@@ -1,5 +1,14 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
+import styled from "styled-components";
+
+const StyledSelect = styled(Form.Select)`
+  border: 1px solid ${({ theme }) => theme.color.primary200};
+  cursor: pointer;
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.color.primary200};
+  }
+`;
 
 export type Option = {
   value: any;
@@ -10,12 +19,14 @@ interface Props {
   options: Option[];
   selectedOption: Option;
   onChangeOption: (option: Option) => void;
+  className?: string;
 }
 
 const Select: React.FC<Props> = ({
   options,
   selectedOption = null,
-  onChangeOption
+  onChangeOption,
+  className
 }) => {
   const onChange = (event: any) => {
     const newSelectedOption =
@@ -23,13 +34,21 @@ const Select: React.FC<Props> = ({
     onChangeOption(newSelectedOption);
   };
   return (
-    <Form.Select value={selectedOption?.value} onChange={onChange}>
+    <StyledSelect
+      value={selectedOption?.value}
+      onChange={onChange}
+      className={`${className} selectpicker`}
+    >
       {options.map(option => (
-        <option key={option?.value} value={option?.value}>
+        <option
+          className="select-option"
+          key={option?.value}
+          value={option?.value}
+        >
           {option?.label}
         </option>
       ))}
-    </Form.Select>
+    </StyledSelect>
   );
 };
 

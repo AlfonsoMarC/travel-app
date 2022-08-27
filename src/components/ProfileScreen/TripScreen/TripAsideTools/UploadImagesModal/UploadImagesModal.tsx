@@ -7,12 +7,15 @@ import FileInput, {
 import Button from "components/shared/Button/Button";
 import { Trip } from "types/types";
 import Select, { Option } from "components/shared/Select/Select";
-import { createPosts } from "../../api";
+import { createPosts } from "../../../api";
 
 const StyledModalContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  .location-selector {
+    margin-bottom: ${({ theme }) => theme.spacing.space4};
+  }
   button {
     margin-top: ${({ theme }) => theme.spacing.space4};
   }
@@ -55,7 +58,8 @@ const UploadImagesModal: React.FC<Props> = ({
     setsaveLoading(true);
     await createPosts({
       files: files,
-      trip: trip._id
+      trip: trip._id,
+      location: location?.value
     });
     await getTrip();
     onCloseModal();
@@ -67,11 +71,14 @@ const UploadImagesModal: React.FC<Props> = ({
       onCloseModal={onCloseModal}
     >
       <StyledModalContent>
-        <Select
-          options={locationSelectOptions}
-          selectedOption={location}
-          onChangeOption={onChangeLocation}
-        />
+        {locationSelectOptions.length > 0 && (
+          <Select
+            options={locationSelectOptions}
+            selectedOption={location}
+            onChangeOption={onChangeLocation}
+            className="location-selector"
+          />
+        )}
         <FileInput files={files} onChangeFiles={onChangeFiles} />
         <Button
           onClick={handleSave}

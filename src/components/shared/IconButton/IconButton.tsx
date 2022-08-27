@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PropTypes from "prop-types";
 import { labelS } from "assets/mixins";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 

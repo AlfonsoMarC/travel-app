@@ -17,6 +17,21 @@ export const createTrip = async (trip: TripPayload) => {
   }
 };
 
+export const deleteTrip = async (tripId: string) => {
+  try {
+    const resp = await fetchWithToken({
+      endpoint: `trips/${tripId}`,
+      method: "DELETE"
+    });
+    const body = await resp.json();
+    return body;
+  } catch {
+    return {
+      error: "There was an error deleting the trip"
+    };
+  }
+};
+
 export const createLocation = async (location: LocationPayload) => {
   try {
     const resp = await fetchWithToken({

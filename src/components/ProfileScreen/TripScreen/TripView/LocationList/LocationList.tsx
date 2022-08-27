@@ -3,15 +3,14 @@ import styled from "styled-components";
 import { Location } from "types/types";
 import LocationListItem from "./LocationListItem/LocationListItem";
 
-const LocationListContainer = styled.div`
-  .location-list {
-    padding: ${({ theme }) => theme.spacing.space4};
-  }
+const StyledLocationListContainer = styled.div`
+  padding: ${({ theme }) => theme.spacing.space4};
+
   .location-list-header {
     margin-bottom: ${({ theme }) => theme.spacing.space4};
     cursor: pointer;
   }
-  .no-locations-view {
+  .no-location-list-view {
     height: 100%;
     border: 1px solid black;
   }
@@ -27,16 +26,16 @@ const LocationList: React.FC<Props> = ({
   onClickLocationListHeader
 }) => {
   return (
-    <LocationListContainer>
+    <StyledLocationListContainer id="location-list-container">
       {locations.length ? (
-        <div className="location-list">
+        <div>
           <div
             onClick={onClickLocationListHeader}
             className="location-list-header"
           >
             Locations
           </div>
-          <ul>
+          <ul className="location-list">
             {locations.map(location => (
               <LocationListItem location={location} key={location._id} />
             ))}
@@ -45,7 +44,7 @@ const LocationList: React.FC<Props> = ({
       ) : (
         <div className="no-locations-view" />
       )}
-    </LocationListContainer>
+    </StyledLocationListContainer>
   );
 };
 
