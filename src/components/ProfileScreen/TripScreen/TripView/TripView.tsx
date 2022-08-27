@@ -65,7 +65,7 @@ const TripView: React.FC<Props> = ({ trip }) => {
   };
 
   return (
-    <StyledTripViewContainer>
+    <StyledTripViewContainer id="trip-view-container">
       <div className="trip-header-container">
         <h2>{tripTitle}</h2>
       </div>

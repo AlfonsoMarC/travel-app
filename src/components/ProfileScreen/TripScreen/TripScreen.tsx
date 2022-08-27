@@ -2,13 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import useFetchModel from "customHooks/useFetchModel";
-import AsideMenu from "components/shared/AsideMenu/AsideMenu";
-import IconButton from "components/shared/IconButton/IconButton";
 import useViewport from "customHooks/useViewport";
-import UploadImagesModal from "./UploadImagesModal/UploadImagesModal";
 import TripView from "./TripView/TripView";
-import NewLocationModal from "./NewLocationModal/NewLocationModal";
 import PostListView from "./PostListView/PostListView";
+import TripAsideTools from "./TripAsideTools/TripAsideTools";
 
 const StyledTripContainer = styled.div`
   display: flex;
@@ -20,15 +17,7 @@ const StyledTripContainer = styled.div`
 const TripScreen: React.FC = () => {
   const { tripId } = useParams<{ uid?: string; tripId?: string }>();
   const { isMedium } = useViewport();
-  const [showUploadImagesModal, setshowUploadImagesModal] = useState(false);
-  const [showNewLocationModal, setShowNewLocationModal] = useState(false);
 
-  const toggleUploadImagesModal = () => {
-    setshowUploadImagesModal(!showUploadImagesModal);
-  };
-  const toggleNewLocationModal = () => {
-    setShowNewLocationModal(!showNewLocationModal);
-  };
   const [{ loading: tripLoading, result: trip, error: tripError }, fetchModel] =
     useFetchModel({
       loading: true
@@ -46,43 +35,17 @@ const TripScreen: React.FC = () => {
     return null;
   }
 
-  return !tripError ? (
-    <StyledTripContainer>
-      {isMedium ? <TripView trip={trip} /> : <PostListView trip={trip} />}
-
-      <AsideMenu className="trip-aside-tools">
+  return (
+    <StyledTripContainer id="trip-screen-container">
+      {!tripError ? (
         <>
-          <IconButton
-            icon={"image"}
-            onClick={toggleUploadImagesModal}
-            tooltip="Upload images"
-          />
-          <IconButton
-            icon={"map-marker-alt"}
-            onClick={toggleNewLocationModal}
-            tooltip="Create location"
-          />
+          {isMedium ? <TripView trip={trip} /> : <PostListView trip={trip} />}
+          <TripAsideTools trip={trip} getTrip={getTrip} />
         </>
-      </AsideMenu>
-      {showUploadImagesModal && (
-        <UploadImagesModal
-          showModal={showUploadImagesModal}
-          onCloseModal={toggleUploadImagesModal}
-          trip={trip}
-          getTrip={getTrip}
-        />
-      )}
-      {showNewLocationModal && (
-        <NewLocationModal
-          closeNewLocationModal={toggleNewLocationModal}
-          showNewLocationModal={showNewLocationModal}
-          trip={trip}
-          getTrip={getTrip}
-        />
+      ) : (
+        <div id="trip-screen-error">trip error</div>
       )}
     </StyledTripContainer>
-  ) : (
-    <div>trip error</div>
   );
 };
 

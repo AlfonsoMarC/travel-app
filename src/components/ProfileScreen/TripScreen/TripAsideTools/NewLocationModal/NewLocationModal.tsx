@@ -10,7 +10,7 @@ import FileInput, {
   FileWithPreview
 } from "components/shared/FileInput/FileInput";
 import { useNavigate } from "react-router-dom";
-import { createLocation, createPosts } from "../../api";
+import { createLocation, createPosts } from "components/ProfileScreen/api";
 
 const StyledModalContent = styled.div`
   display: flex;
@@ -30,15 +30,15 @@ const StyledModalContent = styled.div`
 `;
 
 interface Props {
-  closeNewLocationModal: () => void;
-  showNewLocationModal: boolean;
+  showModal: boolean;
+  onCloseModal: () => void;
   trip: Trip;
   getTrip: () => void;
 }
 
 const NewLocationModal: React.FC<Props> = ({
-  closeNewLocationModal,
-  showNewLocationModal,
+  showModal,
+  onCloseModal,
   trip,
   getTrip
 }) => {
@@ -72,14 +72,14 @@ const NewLocationModal: React.FC<Props> = ({
     }
     await getTrip();
     navigate(`?location=${location?._id}`);
-    closeNewLocationModal();
+    onCloseModal();
     return;
   };
 
   return (
     <CustomModal
-      showModal={showNewLocationModal}
-      onCloseModal={closeNewLocationModal}
+      showModal={showModal}
+      onCloseModal={onCloseModal}
       title={`Create a new location in ${trip.title}`}
     >
       <StyledModalContent>
