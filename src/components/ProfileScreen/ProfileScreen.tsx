@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import { RootState } from "store";
+import { useSelector } from "react-redux";
 import TripsScreen from "./TripsScreen/TripsScreen";
 import TripScreen from "./TripScreen/TripScreen";
 import ProfileNavbar from "./PropfileNavbar/ProfileNavbar";
-import LocationScreen from "./LocationsScreen/LocationScreen";
+import FriendsScreen from "./FriendsScreen/FriendsScreen";
 
 const StyledProfileScreenContainer = styled.div`
   display: flex;
@@ -22,15 +24,21 @@ const StyledProfileScreenContainer = styled.div`
 `;
 
 const ProfileScreen: React.FC = () => {
+  const params = useParams();
+  const urlUser = params.uid;
+  const { uid } = useSelector((state: RootState) => state.auth);
+
+  if (urlUser !== uid) {
+    return <div>You dont have access to this profile || Profile not found</div>;
+  }
   return (
     <StyledProfileScreenContainer>
-      <ProfileNavbar />
+      <ProfileNavbar urlUser={urlUser} />
       <div className="profile-content">
         <Routes>
           <Route path="trips" element={<TripsScreen />} />
           <Route path="trip/:tripId" element={<TripScreen />} />
-          <Route path="locations" element={<LocationScreen />} />
-          <Route path="articles" element={<LocationScreen />} />
+          <Route path="friends" element={<FriendsScreen />} />
           <Route path="*" element={<Navigate to="trips" replace />} />
         </Routes>
       </div>

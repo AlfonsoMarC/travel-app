@@ -1,17 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-/* import {
-  useRouteMatch,
-  useLocation,
-  useHistory,
-  BrowserRouter
-} from "react-router-dom"; */
 import NavbarIconItem from "components/shared/NavbarIconItem/NavbarIconItem";
 
 const StyledNavbarContainer = styled.div`
   position: relative;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.color.primary200};
+  padding: ${({ theme }) => theme.spacing.space2};
   ul {
     display: flex;
   }
@@ -27,22 +22,24 @@ const StyledNavbarContainer = styled.div`
     right: 0;
     z-index: 99;
     width: unset;
-    padding-right: ${({ theme }) => theme.spacing.space16};
+    margin-right: ${({ theme }) => theme.spacing.space16};
     background: transparent;
     border-bottom: none;
   }
 `;
 
-const ProfileNavbar: React.FC = () => {
-  // const { url } = useRouteMatch();
+interface Props {
+  urlUser?: string;
+}
+
+const ProfileNavbar: React.FC<Props> = ({ urlUser }) => {
+  const profileUrl = `/profile/${urlUser}`;
 
   return (
     <StyledNavbarContainer>
       <ul>
-        eeeee
-        {/*  <NavbarIconItem to={`${url}/trips`} label="Trips" />
-        <NavbarIconItem to={`${url}/locations`} label="Locations" />
-        <NavbarIconItem to={`${url}/articles`} label="Articles" /> */}
+        <NavbarIconItem to={`${profileUrl}/trips`} label="Trips" />
+        <NavbarIconItem to={`${profileUrl}/friends`} label="Friends" />
       </ul>
     </StyledNavbarContainer>
   );

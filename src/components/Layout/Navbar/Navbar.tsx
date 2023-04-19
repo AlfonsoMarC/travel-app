@@ -1,10 +1,9 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "actions/auth";
 import NavbarIconItem from "components/shared/NavbarIconItem/NavbarIconItem";
-import { RootState } from "store";
 
 const StyledNavbarContainer = styled.div`
   flex-shrink: 0;
@@ -13,11 +12,16 @@ const StyledNavbarContainer = styled.div`
   height: 56px;
   background-color: ${({ theme }) => theme.color.primary500};
   align-items: center;
+  padding: ${({ theme }) => theme.spacing.space2}
+    ${({ theme }) => theme.spacing.space5};
 `;
 
 const StyledLink = styled(Link)`
   width: 300px;
   color: ${({ theme }) => theme.color.primary100};
+  &:hover {
+    color: ${({ theme }) => theme.color.white};
+  }
 `;
 
 const StyledMenu = styled.ul`
@@ -33,10 +37,16 @@ const StyledMenu = styled.ul`
 
 const StyledLogoutContainer = styled.div`
   display: flex;
+  justify-content: flex-end;
+  > button {
+    color: ${({ theme }) => theme.color.primary100};
+    &:hover {
+      color: ${({ theme }) => theme.color.white};
+    }
+  }
 `;
 
 const Navbar: React.FC = () => {
-  const { uid, name } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -44,15 +54,13 @@ const Navbar: React.FC = () => {
   };
   return (
     <StyledNavbarContainer>
-      {/* {name} */}
       <div>
         <StyledLink to="/">Travel App</StyledLink>
       </div>
       <StyledMenu>
         <NavbarIconItem to="/home" icon="home" label="Home" />
-        <NavbarIconItem to={`/profile`} icon="perm_identity" label="Profile" />
+        <NavbarIconItem to="/profile" icon="perm_identity" label="Profile" />
       </StyledMenu>
-
       <StyledLogoutContainer>
         <button onClick={handleLogout}>Logout</button>
       </StyledLogoutContainer>

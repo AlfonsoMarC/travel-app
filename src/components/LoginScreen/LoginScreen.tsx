@@ -26,7 +26,7 @@ const StyledLoginScreenContainer = styled.div`
 const StyledLoginImageContainer = styled.div`
   display: none;
   width: 380px;
-  height: 440px;
+  height: 460px;
   background: grey;
   ${({ theme }) => theme.media.atLarge} {
     display: flex;
@@ -43,7 +43,7 @@ const StyledFormContainer = styled.div`
   height: 100%;
   ${({ theme }) => theme.media.atSmall} {
     width: 380px;
-    height: 440px;
+    height: 460px;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   }
   ${({ theme }) => theme.media.atLarge} {

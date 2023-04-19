@@ -5,8 +5,8 @@ const StyledDiv = styled.div`
   margin-top: 70px;
 `;
 
-const LocationScreen = () => {
-  return <StyledDiv>LocationScreen</StyledDiv>;
+const FriendsScreen = () => {
+  return <StyledDiv>FriendsScreen</StyledDiv>;
 };
 
-export default LocationScreen;
+export default FriendsScreen;

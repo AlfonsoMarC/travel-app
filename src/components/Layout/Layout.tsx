@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
-import ProfileScreen from "components/ProfileScreen/index";
+import ProfileScreen from "components/ProfileScreen/ProfileScreen";
 import HomeScreen from "components/HomeScreen/HomeScreen";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
